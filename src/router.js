@@ -22,11 +22,7 @@ export default function Routes() {
       <Nav fixed={fixed} trans={trans} />
       <React.Suspense fallback={<LoadScreen />}>
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => ( <Home setNav={(val) => setFixed(val)} setTrans={(val) => setTrans(val)} /> )}
-          />
+          <Route path="/" exact render={() => ( <Home setNav={(val) => setFixed(val)} setTrans={(val) => setTrans(val)} /> )} />
           <Route path="/TodoApp" component={TodoApp} />
           <Route path="/ColorApp" component={ColorApp} />
           <Route path="/Covid" component={Covid} />
