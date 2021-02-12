@@ -1,0 +1,50 @@
+:root {
+  --theme: #006ad6;
+}
+
+.container {
+  width: 90%;
+}
+.top-bar {
+  text-align: center;
+}
+
+.title {
+  
+  text-align: center;
+  color: yellow;
+  background: black;
+  padding:30px;
+}
+.top-bar * {
+  vertical-align: middle;
+}
+.small-loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-top: 4px solid var(--theme);
+  border-bottom: 4px solid var(--theme);
+  animation: spinner 1.7s linear infinite;
+}
+
+.big-loader {
+  margin: 100px auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border-top: 10px solid var(--theme);
+  border-bottom: 10px solid var(--theme);
+  animation: spinner 1.7s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

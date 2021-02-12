@@ -1,0 +1,36 @@
+.loader-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: rgba(0, 0, 0, 0.5); */
+}
+
+.loader {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;    
+  border-top: 10px solid #F40;
+  border-bottom: 10px solid #F40;    
+  animation: spinner 1.7s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.loader-text {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  font-weight: bold;
+}

@@ -1,0 +1,46 @@
+.cloud{
+    background:url('../images/weatherIcons.png') -75px -375px;
+    height:75px;
+    width:70px;
+}
+
+.rain{
+    background:url('../images/weatherIcons.png') -280px -375px;
+    height:75px;
+    width:70px;
+}
+
+.clear{
+    background:url('../images/weatherIcons.png') -70px 0px;
+    height:75px;
+    width:70px;
+}
+
+.others{
+    background:url('../images/weatherIcons.png') -140px -525px;
+    height:75px;
+    width:70px;
+}
+
+
+.weather-title{    
+    margin:50px 0;
+}
+
+
+.weather-loader{
+    display: inline-block;
+    background:url('../images/weatherIcons.png') -70px 0px;
+    height:75px;
+    width:70px;
+    animation:weather 2s linear infinite;
+}
+
+@keyframes weather{
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
+

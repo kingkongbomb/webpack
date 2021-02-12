@@ -23,6 +23,9 @@ export default function NavBS(props) {
             <Nav.Link as={NavLink} eventKey="4" to="/Covid">
               SG Covid Tracker
             </Nav.Link>
+            <Nav.Link as={NavLink} eventKey="5" to="/Postman">
+              Postman
+            </Nav.Link>
             <NavDropdown title="JS Frameworks" id="basic-nav-dropdown">
               <NavDropdown.Item
                 target="_blank"
