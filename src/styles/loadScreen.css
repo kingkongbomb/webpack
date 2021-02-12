@@ -4,14 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: rgba(0, 0, 0, 0.5); */
+  position:relative;
 }
 
 .loader {
   width: 150px;
   height: 150px;
   border-radius: 50%;    
-  border-top: 10px solid #F40;
+  border-top: 10px solid #2196f3;
   border-bottom: 10px solid #F40;    
   animation: spinner 1.7s linear infinite;
 }
@@ -27,7 +27,7 @@
 }
 
 .loader-text {
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
