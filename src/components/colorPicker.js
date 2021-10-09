@@ -20,7 +20,19 @@ export default function Color() {
   const [contOffset, setContOffset] = useState(0);
   useEffect(() => {
     setContOffset(document.querySelector(".color-container")?.offsetTop);
+
+    window.addEventListener("keydown", pressToGen);
+    return () => {
+      window.removeEventListener("keydown", pressToGen);
+    };
   }, []);
+
+  function pressToGen(e) {
+    console.log(e.key);
+    if (e.key === "Enter" || e.key === "ArrowRight") {
+      setColor(genColorCode());
+    }
+  }
 
   return (
     <div
