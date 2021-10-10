@@ -4,6 +4,7 @@
   margin-bottom: 50px;
   max-width: 100%;
   width: 1000px;
+  cursor: pointer;
 }
 
 .color-container {
@@ -14,7 +15,7 @@
   width: 100%;
 }
 
-.color-container *:hover {
+.color-container > *:not(.colSquareCont):hover {
   opacity: 0.8;
 }
 
@@ -23,7 +24,6 @@
   height: 100px;
   text-align: center;
   font-size: 100px;
-  cursor: pointer;
   border: none;
   outline: none;
 }
@@ -40,4 +40,29 @@
   background: black;
   border: none;
   outline: none;
+}
+
+.colSquareCont {
+  display: flex;
+  height: 50px;
+}
+
+.colSquare {
+  height: 50px;
+  width: 50px;
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.colSquare:hover {
+  height: 80px;
+  width: 80px;
+}
+
+.colSquare.active {
+  /* border: 3px solid black; */
+  box-shadow: 0px 0px 10px #000;
+  z-index: 2;
+  height: 80px;
+  width: 80px;
 }
