@@ -1,36 +1,34 @@
-:root{
-  --theme: #FF5500;
+:root {
+  --theme: #ff5500;
 }
 
-
 /* for touchscreen devices, no hovering */
-@media (any-hover:none) {
+@media (any-hover: none) {
   button.close {
-      visibility: visible !important;
+    visibility: visible !important;
   }
-  .todo-container{
-    width:95%;
+  .todo-container {
+    width: 95%;
   }
 }
 
 /* Only hover if device supports hovering */
-@media (any-hover:hover) {
-
+@media (any-hover: hover) {
   /* Hover over label, change color of checkbox */
-  label:hover>.cb {
-      background-color: var(--theme);
-      border-radius: 0;
+  label:hover > .cb {
+    background-color: var(--theme);
+    border-radius: 0;
   }
 
   /* Hover over todo item, change color of todo */
   .todo-item:hover .todo {
-      cursor: pointer;
-      color: var(--theme);
+    cursor: pointer;
+    color: var(--theme);
   }
 
   /* Hover over close button, change text decoration */
-  .close:hover ~label .todo{
-      text-shadow: 0 0 25px var(--theme);
+  .close:hover ~ label .todo {
+    text-shadow: 0 0 25px var(--theme);
   }
 }
 
@@ -51,7 +49,7 @@
 }
 
 #todo-input-underline::before {
-  content: '';
+  content: "";
   position: absolute;
   border-bottom: 1px solid grey;
   width: calc(100% - 130px);
@@ -97,12 +95,12 @@ label {
 }
 
 /* Original Checkbox */
-input[type=checkbox] {
+input[type="checkbox"] {
   display: none;
 }
 
 /* Items within the label */
-input[type=checkbox]:checked~span {
+input[type="checkbox"]:checked ~ span {
   text-decoration: line-through;
   color: var(--theme);
 }
@@ -123,14 +121,14 @@ input[type=checkbox]:checked~span {
   transition: all 1s;
 }
 
-input[type=checkbox]:checked~.cb {
+input[type="checkbox"]:checked ~ .cb {
   background-color: var(--theme);
   border-radius: 0;
 }
 
 /* Visible Check box TICK*/
 .cb:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 30%;
   top: 10%;
@@ -144,7 +142,7 @@ input[type=checkbox]:checked~.cb {
   display: none;
 }
 
-input[type=checkbox]:checked~.cb:after {
+input[type="checkbox"]:checked ~ .cb:after {
   display: block;
 }
 
@@ -168,7 +166,6 @@ input[type=checkbox]:checked~.cb:after {
   top: 4px;
   z-index: -1;
 }
-
 
 /* close button */
 button.close {
