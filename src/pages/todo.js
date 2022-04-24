@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/todo.css";
 
 function TodoApp() {
@@ -67,7 +67,7 @@ function Todo(props) {
   return (
     <section className="todo-item">
       <button className="close" onClick={() => props.removeTodo(props.id)}>
-        ×
+        &times;
       </button>
       <label>
         <input

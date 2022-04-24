@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/color.css";
 
 export default function Color() {
@@ -39,7 +39,8 @@ export default function Color() {
     return () => {
       window.removeEventListener("keydown", pressToGen);
     };
-  }, [pressToGen]);
+    // eslint-disable-next-line 
+  }, []);
 
   const [hist, setHist] = useState([]);
   const [histIdx, setHistIdx] = useState(-1);

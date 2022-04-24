@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -7,7 +7,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "../styles/loadScreen.css";
 import { Container, Button } from "react-bootstrap";
 
 export default function Covid() {
@@ -21,7 +20,6 @@ export default function Covid() {
       lastUpdatedAtApify: "2020-10-02T14:40:00.000Z",
     },
   ]);
-  //const [covidData, setCovidData] = useState(require("./covid.json"));
   const [showLoader, setLoader] = useState(true);
   const [curData, setCurData] = useState("infected");
 
@@ -37,7 +35,7 @@ export default function Covid() {
         //Hide Loader
         setLoader(false);
       });
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const refineGraph = (covidData) => {
@@ -76,12 +74,16 @@ export default function Covid() {
 
     //Clean up the Data
     //17th to 29th May is problematic, remove it. Also remove extreme values like >10k cases
-    newData = newData.filter((data) => ((data.dayNum < 17 || data.dayNum > 29 || data.monthNum !== 5)) && data.newCases <= 10000);
+    newData = newData.filter(
+      (data) =>
+        (data.dayNum < 17 || data.dayNum > 29 || data.monthNum !== 5) &&
+        data.newCases <= 10000
+    );
 
     //Remove duplicated items by DATE
     let uniqueVals = [];
     newData = newData.filter((data) => {
-      if ( !uniqueVals.includes(data.dayMonth) && data.infected != null ) {
+      if (!uniqueVals.includes(data.dayMonth) && data.infected != null) {
         uniqueVals.push(data.dayMonth);
         return data;
       }
@@ -93,11 +95,11 @@ export default function Covid() {
   };
 
   const renderBarChart = (
-    <BarChart data={covidData} >
+    <BarChart data={covidData}>
       <Bar dataKey={curData} stroke="var(--bs-teal)" fill="var(--bs-teal)" />
       <XAxis stroke="var(--bs-gray-dark)" dataKey="dayMonth" />
       <YAxis stroke="var(--bs-gray-dark)" />
-      <Tooltip cursor={true}/>
+      <Tooltip cursor={true} />
     </BarChart>
   );
   return (
@@ -136,7 +138,7 @@ export default function Covid() {
               height: "calc(1.375rem + 1.5vw)",
               width: "calc(1.375rem + 1.5vw)",
               borderColor: "var(--bs-teal)",
-              borderWidth:"4px",
+              borderWidth: "4px",
             }}
           ></div>
           <span style={{ verticalAlign: "middle", color: "var(--bs-teal)" }}>

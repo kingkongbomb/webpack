@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./navbar";
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
 
-const Home = React.lazy(() => import("./pages/home"));
-const ColorApp = React.lazy(() => import("./pages/colorPicker"));
-const TodoApp = React.lazy(() => import("./pages/todo"));
-const Covid = React.lazy(() => import("./pages/covid"));
+const Home = lazy(() => import("./pages/home"));
+const ColorApp = lazy(() => import("./pages/colorPicker"));
+const TodoApp = lazy(() => import("./pages/todo"));
+const Covid = lazy(() => import("./pages/covid"));
 
 export default function Routes() {
   const [fixed, setFixed] = useState("");
@@ -15,7 +15,7 @@ export default function Routes() {
   return (
     <Router>
       <Nav fixed={fixed} trans={trans} />
-      <React.Suspense fallback={<LinearProgress />}>
+      <Suspense fallback={<LinearProgress />}>
         <Switch>
           <Route
             path="/"
@@ -31,7 +31,7 @@ export default function Routes() {
           <Route path="/ColorApp" component={ColorApp} />
           <Route path="/Covid" component={Covid} />
         </Switch>
-      </React.Suspense>
+      </Suspense>
     </Router>
   );
 }
