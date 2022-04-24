@@ -7,6 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import CircularProgress from "@mui/material/CircularProgress";
 import { Container, Button } from "react-bootstrap";
 
 export default function Covid() {
@@ -129,23 +130,19 @@ export default function Covid() {
         </div>
       </div>
       {showLoader && (
-        <h1 style={{ textAlign: "center" }}>
-          <div
-            className="loader"
-            style={{
-              display: "inline-block",
-              verticalAlign: "middle",
-              height: "calc(1.375rem + 1.5vw)",
-              width: "calc(1.375rem + 1.5vw)",
-              borderColor: "var(--bs-teal)",
-              borderWidth: "4px",
-            }}
-          ></div>
-          <span style={{ verticalAlign: "middle", color: "var(--bs-teal)" }}>
-            {" "}
-            Loading Latest Data{" "}
-          </span>
-        </h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 10,
+          }}
+        >
+          <CircularProgress size={30} style={{ color: "var(--bs-teal)" }} />
+          <h1 style={{ verticalAlign: "middle", color: "var(--bs-teal)" }}>
+            Loading Latest Data
+          </h1>
+        </div>
       )}
       <h3
         style={{
