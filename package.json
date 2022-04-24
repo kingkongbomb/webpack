@@ -24,8 +24,8 @@
     "analyzecss": "source-map-explorer 'build/static/css/*.css'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "ghpages": "react-scripts build && move build docs",
-    "git": "git add -A && git commit -m 'new commit' && git push",
+    "ghpages": "set BUILD_PATH=docs&& react-scripts build",
+    "git": "git add -A && git commit -m 'removed navbar logo' && git push",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -7,7 +7,6 @@ export default function NavBS(props) {
   return (
     <Navbar collapseOnSelect expand="md" fixed={props.fixed} bg={props.trans} variant="dark" onToggle={toggle=> toggle? console.log("OPEN") :console.log("CLOSE")}>
       <Container>
-        <Navbar.Brand>ComCalc</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
