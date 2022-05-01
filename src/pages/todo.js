@@ -45,7 +45,7 @@ function TodoApp() {
 function TodoInput({ addTodo }) {
   return (
     <>
-      <div id="todo-input-underline"/>
+      <div id="todo-input-underline" />
       <input
         autoComplete="off"
         id="todo-input"
@@ -72,9 +72,6 @@ function TodoList({ todoList, toggleTodo, removeTodo }) {
 function Todo({ todoItem, toggleTodo, removeTodo }) {
   return (
     <section className="todo-item">
-      <button className="close" onClick={() => removeTodo(todoItem.id)}>
-        &times;
-      </button>
       <label>
         <input
           type="checkbox"
@@ -84,6 +81,9 @@ function Todo({ todoItem, toggleTodo, removeTodo }) {
         <span className="cb"></span>
         <span className="todo">{todoItem.todo}</span>
       </label>
+      <button className="close" onClick={() => removeTodo(todoItem.id)}>
+        &times;
+      </button>
     </section>
   );
 }

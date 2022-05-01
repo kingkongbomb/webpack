@@ -75,8 +75,10 @@
   font-size: 24px;
   text-align: left;
   width: 100%;
-  position: relative;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Hover over todo item, make close button appear */
@@ -88,10 +90,6 @@
 label {
   display: inline-block;
   width: calc(100% - 60px);
-  /* user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none; */
 }
 
 /* Original Checkbox */
@@ -130,9 +128,9 @@ input[type="checkbox"]:checked ~ .cb {
 .cb:after {
   content: "";
   position: absolute;
-  left: 30%;
-  top: 10%;
-  width: 10px;
+  left: 35%;
+  top: 12%;
+  width: 13px;
   height: 25px;
   border: solid white;
   border-width: 0 5px 5px 0;
@@ -161,7 +159,6 @@ input[type="checkbox"]:checked ~ .cb:after {
   border-bottom: 1px solid grey;
   width: 100%;
   left: 0;
-
   height: 100%;
   top: 4px;
   z-index: -1;
@@ -169,17 +166,17 @@ input[type="checkbox"]:checked ~ .cb:after {
 
 /* close button */
 button.close {
-  position: absolute;
-  right: 0;
-  top: 0%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--theme);
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  visibility: hidden;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 30px;
+  padding: 0;
   border: none;
   outline: none;
-  color: var(--theme);
-  font-size: 70px;
-  background-color: rgba(0, 0, 0, 0);
-  transform: translateY(-50%);
-  cursor: pointer;
-  height: 70px;
-  width: 70px;
-  visibility: hidden;
 }
