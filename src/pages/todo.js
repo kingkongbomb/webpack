@@ -2,81 +2,87 @@ import { useState, useEffect } from "react";
 import "../styles/todo.css";
 
 function TodoApp() {
+  //Initialize state from localstorage, if none, then give state an empty array
   const [todoList, setTodos] = useState(JSON.parse(localStorage.todos || "[]"));
+
+  //Everytime todoList is updated, save to localstorage
   useEffect(() => {
     localStorage.todos = JSON.stringify(todoList);
   }, [todoList]);
-  function toggleTodos(index) {
-    const newTodos = todoList.slice();
-    newTodos[index].done = !newTodos[index].done;
+
+  function toggleTodo(id) {
+    const newTodos = todoList.map((todo) =>
+      todo.id === id ? { ...todo, done: !todo.done } : todo
+    );
     setTodos(newTodos);
   }
+
   function addTodo(e) {
-    if (e.key === "Enter") {
-      const newTodos = todoList.slice();
-      newTodos.push({ todo: e.target.value, done: false });
-      setTodos(newTodos);
-      e.target.value = "";
-    }
+    setTodos([
+      { id: Date.now(), todo: e.target.value, done: false },
+      ...todoList,
+    ]);
+    e.target.value = "";
   }
-  function removeTodo(index) {
-    const newTodos = todoList.slice();
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+
+  function removeTodo(id) {
+    setTodos(todoList.filter((todo) => todo.id !== id));
   }
 
   return (
     <div className="todo-container">
-      <h1 id='todoTitle'>To Do List</h1>
+      <h1 id="todoTitle">To Do List</h1>
       <TodoInput addTodo={addTodo} />
       <TodoList
         todoList={todoList}
-        toggleTodos={toggleTodos}
+        toggleTodo={toggleTodo}
         removeTodo={removeTodo}
       />
     </div>
   );
 }
-function TodoInput(props) {
+
+function TodoInput({ addTodo }) {
   return (
     <>
-      <div id="todo-input-underline"></div>
+      <div id="todo-input-underline"/>
       <input
         autoComplete="off"
         id="todo-input"
         type="text"
         placeholder="Add To-Do!"
-        onKeyDown={props.addTodo}
+        onKeyDown={(e) => e.key === "Enter" && addTodo(e)}
       />
     </>
   );
 }
-function TodoList(props) {
-  const renderedList = props.todoList.map((todo, index) => (
+
+function TodoList({ todoList, toggleTodo, removeTodo }) {
+  const renderedList = todoList.map((todo, index) => (
     <Todo
+      key={todo.id}
       todoItem={todo}
-      key={index}
-      id={index}
-      toggleTodos={props.toggleTodos}
-      removeTodo={props.removeTodo}
+      toggleTodo={toggleTodo}
+      removeTodo={removeTodo}
     />
   ));
   return <section id="todo-list">{renderedList}</section>;
 }
-function Todo(props) {
+
+function Todo({ todoItem, toggleTodo, removeTodo }) {
   return (
     <section className="todo-item">
-      <button className="close" onClick={() => props.removeTodo(props.id)}>
+      <button className="close" onClick={() => removeTodo(todoItem.id)}>
         &times;
       </button>
       <label>
         <input
           type="checkbox"
-          checked={props.todoItem.done}
-          onChange={() => props.toggleTodos(props.id)}
+          checked={todoItem.done}
+          onChange={() => toggleTodo(todoItem.id)}
         />
         <span className="cb"></span>
-        <span className="todo">{props.todoItem.todo}</span>
+        <span className="todo">{todoItem.todo}</span>
       </label>
     </section>
   );
