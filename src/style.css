@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #e7e8ec;
+  padding-bottom: 15vw;
+  overflow: scroll;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,sans-serif;
+}
