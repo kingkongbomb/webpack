@@ -1,0 +1,68 @@
+.color-container * {
+  font-family: Arial, Helvetica, sans-serif;
+
+  margin-bottom: 50px;
+  max-width: 100%;
+  width: 1000px;
+  cursor: pointer;
+}
+
+.color-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.color-container > *:not(.colSquareCont):hover {
+  opacity: 0.8;
+}
+
+/* Input Style */
+.color-container input {
+  height: 100px;
+  text-align: center;
+  font-size: 100px;
+  border: none;
+  outline: none;
+}
+
+.color-container input::selection {
+  background-color: black;
+  color: white;
+}
+
+/* Button style */
+.color-container button {
+  font-size: 30px;
+  height: 50px;
+  background: black;
+  border: none;
+  outline: none;
+}
+
+.colSquareCont {
+  display: flex;
+  height: 50px;
+}
+
+.colSquare {
+  height: 50px;
+  width: 50px;
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.colSquare:hover {
+  height: 80px;
+  width: 80px;
+}
+
+.colSquare.active {
+  /* border: 3px solid black; */
+  box-shadow: 0px 0px 10px #000;
+  z-index: 2;
+  height: 80px;
+  width: 80px;
+}
