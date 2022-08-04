@@ -8,13 +8,13 @@ export default function WordHack() {
   const [ans, setAns] = useState([]);
 
   const fetchWordList = async () => {
-    const res = await fetch("/resources/enWords10k.txt");
+    const res = await fetch("./resources/enWords10k.txt");
     const data = await res.text();
     setAllWords(data.split("\n"));
   };
 
   useEffect(async () => {
-    const res = await fetch("/resources/enWords10k.txt");
+    const res = await fetch("./resources/enWords10k.txt");
     const data = await res.text();
     setAllWords(data.split("\n"));
     grpWordsByLength(data.split("\n"));
