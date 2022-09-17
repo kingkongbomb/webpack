@@ -1,19 +1,21 @@
-import { Container, Input } from "@mui/material";
+import { Container,  Slider } from "@mui/material";
 import { useEffect, useState } from "react";
+import TextField from "@mui/material/TextField";
 
 export default function WordHack() {
-  const [allWords, setAllWords] = useState([]);
+  // const [allWords, setAllWords] = useState([]);
   const [wordMap, setWordMap] = useState({});
   const [renderWords, setRenderWords] = useState([]);
   const [ans, setAns] = useState([]);
   const [charMap, setCharMap] = useState({});
   const [helpWords, setHelpWords] = useState("");
+  const [wordLength, setWordLength] = useState(0);
 
   const initWordList = async () => {
     const res = await fetch("./resources/enWords10k.txt");
     const data = await res.text();
     const dataArr = data.split("\r\n");
-    setAllWords(dataArr);
+    // setAllWords(dataArr);
     grpWordsByLength(dataArr);
   };
 
@@ -39,6 +41,7 @@ export default function WordHack() {
 
   const getWords = (e) => {
     const length = parseInt(e.target.value) || 0;
+    setWordLength(length);
     setRenderWords(wordMap[length] || []);
     setAns(Array(parseInt(length || 0)).fill(""));
   };
@@ -85,31 +88,65 @@ export default function WordHack() {
   };
 
   return (
-    <Container>
-      <Input
-        placeholder="Possible Words"
+    <Container style={{ paddingTop: 30 }}>
+      <TextField
+        //style={{ height: 30 }}
+        label="Possible Characters"
         value={helpWords}
         onChange={(e) => {
           setCharMap({}); //Clear charMap
           setHelpWords(e.target.value.toLowerCase());
         }}
+        onFocus={(e) => e.target.select()}
       />
-      <Input
-        placeholder="Word Length"
+
+      <h1 style={{ padding: "30px 0" }}>
+        Word length: <b>{wordLength}</b>
+      </h1>
+      <Slider
+        value={wordLength}
+        valueLabelDisplay="auto"
+        step={1}
+        min={0}
+        max={10}
         onChange={(e) => {
           setCharMap({}); //Clear charMap
           getWords(e);
         }}
       />
-      <div style={{ display: "flex", gap: 20 }}>
+
+      <form
+        style={{ display: "flex", flexWrap: "wrap", gap: 20, margin: "30px 0" }}
+      >
         {ans.map((char, idx) => (
-          <Input
+          <input
+            maxLength={1}
+            style={{
+              width: 70,
+              height: 70,
+              textAlign: "center",
+              border: "none",
+              outline: "none",
+              boxShadow: "0px 0px 3px #333",
+              fontSize: 40,
+            }}
+            label=" "
             key={idx}
             value={char}
-            onChange={(e) => inputChar(e.target.value, idx)}
+            onFocus={(e) => e.target.select()}
+            onChange={(e) => {
+              inputChar(e.target.value.toLowerCase(), idx);
+
+              //Focus next input
+              const form = e.target.form;
+              if (form.elements[idx + 1]) {
+                form.elements[idx + 1].focus();
+              }
+              e.preventDefault();
+            }}
           />
         ))}
-      </div>
+      </form>
       <RenderList />
     </Container>
   );
