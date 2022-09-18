@@ -1,9 +1,9 @@
-import { Container,  Slider } from "@mui/material";
+import { Container, Slider } from "@mui/material";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
+import wordArr from "../resources/enWords10k";
 
 export default function WordHack() {
-  // const [allWords, setAllWords] = useState([]);
   const [wordMap, setWordMap] = useState({});
   const [renderWords, setRenderWords] = useState([]);
   const [ans, setAns] = useState([]);
@@ -11,16 +11,8 @@ export default function WordHack() {
   const [helpWords, setHelpWords] = useState("");
   const [wordLength, setWordLength] = useState(0);
 
-  const initWordList = async () => {
-    const res = await fetch("./resources/enWords10k.txt");
-    const data = await res.text();
-    const dataArr = data.split("\r\n");
-    // setAllWords(dataArr);
-    grpWordsByLength(dataArr);
-  };
-
   useEffect(() => {
-    initWordList();
+    grpWordsByLength(wordArr);
   }, []);
 
   const grpWordsByLength = (words) => {
@@ -90,7 +82,6 @@ export default function WordHack() {
   return (
     <Container style={{ paddingTop: 30 }}>
       <TextField
-        //style={{ height: 30 }}
         label="Possible Characters"
         value={helpWords}
         onChange={(e) => {

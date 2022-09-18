@@ -1,4 +1,4 @@
-import { Input, TextareaAutosize, TextField, Container } from "@mui/material";
+import { TextField, Container } from "@mui/material";
 import { useState } from "react";
 import "../styles/curl.css";
 
