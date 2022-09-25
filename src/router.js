@@ -16,19 +16,15 @@ export default function Routes() {
 
   return (
     <Router>
-      <Nav fixed={fixed} trans={trans} />
+      <Nav fixed={fixed} trans={trans} setTrans={setTrans} />
       <Suspense fallback={<LinearProgress />}>
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Home
-                setNav={(val) => setFixed(val)}
-                setTrans={(val) => setTrans(val)}
-              />
-            )}
-          />
+          <Route path="/" exact>
+            <Home
+              setNav={(val) => setFixed(val)}
+              setTrans={(val) => setTrans(val)}
+            />
+          </Route>
           <Route path="/TodoApp" component={TodoApp} />
           <Route path="/ColorApp" component={ColorApp} />
           <Route path="/Covid" component={Covid} />

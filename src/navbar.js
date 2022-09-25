@@ -30,14 +30,15 @@ const routeList = [
   },
 ];
 
-export default function NavBS(props) {
+export default function NavBS({ fixed, trans, setTrans }) {
   return (
     <Navbar
       collapseOnSelect
       expand="md"
-      fixed={props.fixed}
-      bg={props.trans}
+      fixed={fixed}
+      bg={trans}
       variant="dark"
+      onToggle={(opened) => setTrans(opened ? "dark" : "")}
     >
       <Container>
         <Toggle aria-controls="basic-navbar-nav" />
