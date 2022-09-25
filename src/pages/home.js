@@ -2,13 +2,11 @@ import { useEffect } from "react";
 import "../styles/home.css";
 import bg from "../images/bg3.jpg";
 
-export default function Home(props) {
+export default function Home({ setHomePg }) {
   useEffect(() => {
-    props.setNav("top");
-    props.setTrans("");
+    setHomePg(true);
     return () => {
-      props.setNav("");
-      props.setTrans("dark");
+      setHomePg(false);
     };
     // eslint-disable-next-line
   }, []);

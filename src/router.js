@@ -11,19 +11,15 @@ const Covid = lazy(() => import("./pages/covid"));
 const Curl = lazy(() => import("./pages/curl"));
 
 export default function Routes() {
-  const [fixed, setFixed] = useState("");
-  const [trans, setTrans] = useState("dark");
+  const [homePg, setHomePg] = useState(false);
 
   return (
     <Router>
-      <Nav fixed={fixed} trans={trans} setTrans={setTrans} />
+      <Nav homePg={homePg} setHomePg={setHomePg} />
       <Suspense fallback={<LinearProgress />}>
         <Switch>
           <Route path="/" exact>
-            <Home
-              setNav={(val) => setFixed(val)}
-              setTrans={(val) => setTrans(val)}
-            />
+            <Home setHomePg={setHomePg} />
           </Route>
           <Route path="/TodoApp" component={TodoApp} />
           <Route path="/ColorApp" component={ColorApp} />

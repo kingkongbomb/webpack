@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -30,15 +30,21 @@ const routeList = [
   },
 ];
 
-export default function NavBS({ fixed, trans, setTrans }) {
+export default function NavBS({ homePg, setHomePg }) {
+  const [trans, setTrans] = useState("");
+
   return (
     <Navbar
       collapseOnSelect
       expand="md"
-      fixed={fixed}
-      bg={trans}
+      fixed={homePg ? "top" : false}
+      bg={homePg ? trans : "dark"}
       variant="dark"
-      onToggle={(opened) => setTrans(opened ? "dark" : "")}
+      onToggle={(opened) => {
+        if (homePg) {
+          setTrans(opened ? "dark" : "");
+        }
+      }}
     >
       <Container>
         <Toggle aria-controls="basic-navbar-nav" />
