@@ -17,6 +17,10 @@ const routeList = [
     url: "/WordHack",
   },
   {
+    title: "Image URL Generator",
+    url: "/ImageUrl",
+  },
+  {
     title: "Todo",
     url: "/TodoApp",
   },
