@@ -47,5 +47,8 @@
   "homepage": ".",
   "devDependencies": {
     "dotenv": "^8.2.0"
+  },
+  "volta": {
+    "node": "18.12.0"
   }
 }

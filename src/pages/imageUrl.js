@@ -1,4 +1,10 @@
-import { TextField } from "@mui/material";
+import {
+  Button,
+  ClickAwayListener,
+  Container,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import { useState } from "react";
 
 export default function ImageUrl() {
@@ -6,9 +12,18 @@ export default function ImageUrl() {
     "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"
   );
 
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
   const getBase64 = (file) => {
     return new Promise((resolve) => {
-      let fileInfo;
       let baseURL = "";
       // Make new FileReader
       let reader = new FileReader();
@@ -38,24 +53,44 @@ export default function ImageUrl() {
       });
   };
 
-  return (
-    <div>
-      <input
-        id="asd"
-        type="file"
-        accept="image/*"
-        onChange={handleFileInputChange}
-      />
+  const copyUrl = () => {
+    navigator.clipboard.writeText(imgUrl).then(
+      () => handleTooltipOpen(),
+      () => null
+    );
+  };
 
-      {/* <img src={`data:image/png;base64,${imgUrl}`} /> */}
-      <img style={{ maxWidth: 400, maxHeight: 400 }} src={imgUrl} />
-      <TextField
-        id="outlined-multiline-static"
-        label="Base64"
-        multiline
-        rows={4}
-        value={imgUrl}
-      />
-    </div>
+  return (
+    <Container
+      maxWidth="sm"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 30,
+        paddingTop: 30,
+        paddingBottom: 30,
+      }}
+    >
+      <input type="file" accept="image/*" onChange={handleFileInputChange} />
+      <img alt="" style={{ maxWidth: 300, maxHeight: 300 }} src={imgUrl} />
+      <TextField label="Base64 URL" multiline rows={4} value={imgUrl} />
+      <ClickAwayListener onClickAway={handleTooltipClose}>
+        <Tooltip
+          PopperProps={{
+            disablePortal: true,
+          }}
+          onClose={handleTooltipClose}
+          open={open}
+          disableFocusListener
+          disableHoverListener
+          disableTouchListener
+          title="Copied"
+        >
+          <Button variant="contained" onClick={copyUrl}>
+            Copy
+          </Button>
+        </Tooltip>
+      </ClickAwayListener>
+    </Container>
   );
 }
