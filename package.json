@@ -24,7 +24,6 @@
     "analyzecss": "source-map-explorer 'build/static/css/*.css'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "ghpages": "set BUILD_PATH=docs&& react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -48,6 +47,6 @@
     "dotenv": "^8.2.0"
   },
   "volta": {
-    "node": "18.12.0"
+    "node": "16.18.1"
   }
 }
