@@ -25,7 +25,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "ghpages": "set BUILD_PATH=docs&& react-scripts build",
-    "git": "git add -A && git commit -m 'covid page added missing loading icon' && git push",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
