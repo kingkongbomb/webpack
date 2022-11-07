@@ -13,6 +13,10 @@ const routeList = [
     url: "/",
   },
   {
+    title: "Whatsapp",
+    url: "/Whatsapp",
+  },
+  {
     title: "Word Hack",
     url: "/WordHack",
   },

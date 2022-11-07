@@ -10,6 +10,7 @@ const Covid = lazy(() => import("./pages/covid"));
 const Curl = lazy(() => import("./pages/curl"));
 const WordHack = lazy(() => import("./pages/wordHack"));
 const ImageUrl = lazy(() => import("./pages/imageUrl"));
+const WhatsApp = lazy(() => import("./pages/whatsapp.js"));
 
 export default function Routes() {
   const [homePg, setHomePg] = useState(false);
@@ -28,6 +29,7 @@ export default function Routes() {
           <Route path="/Curl" component={Curl} />
           <Route path="/WordHack" component={WordHack} />
           <Route path="/ImageUrl" component={ImageUrl} />
+          <Route path="/Whatsapp" component={WhatsApp} />
         </Switch>
       </Suspense>
     </Router>
