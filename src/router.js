@@ -10,7 +10,7 @@ const Covid = lazy(() => import("./pages/covid"));
 const Curl = lazy(() => import("./pages/curl"));
 const WordHack = lazy(() => import("./pages/wordHack"));
 const ImageUrl = lazy(() => import("./pages/imageUrl"));
-const WhatsApp = lazy(() => import("./pages/whatsapp.js"));
+const WhatsApp = lazy(() => import("./pages/whatsapp"));
 
 export default function Routes() {
   const [homePg, setHomePg] = useState(false);
