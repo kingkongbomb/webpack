@@ -1,92 +1,71 @@
 import { Container, Slider } from "@mui/material";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import wordArr from "../resources/enWords10k";
+import englishWords from "../resources/enWords10k";
+
+let firstLoad = true;
 
 export default function WordHack() {
-  const [wordMap, setWordMap] = useState({});
-  const [renderWords, setRenderWords] = useState([]);
-  const [ans, setAns] = useState([]);
-  const [charMap, setCharMap] = useState({});
-  const [helpWords, setHelpWords] = useState("");
   const [wordLength, setWordLength] = useState(0);
+  const [validWords, setValidWords] = useState([]);
+  const [possibleChars, setPossibleChars] = useState("");
 
   useEffect(() => {
-    grpWordsByLength(wordArr);
-  }, []);
-
-  const grpWordsByLength = (words) => {
-    const map = {};
-
-    for (let x = 0; x < words.length; x++) {
-      const word = words[x];
-      const length = word.length;
-      if (map[length] === undefined) {
-        map[length] = [word];
-      } else {
-        map[length].push(word);
-      }
+    if (firstLoad) {
+      firstLoad = false;
+    } else {
+      setValidWords(getWords(possibleChars, wordLength));
     }
+  }, [wordLength]);
 
-    setWordMap(map);
-  };
-
-  const getWords = (e) => {
-    const length = parseInt(e.target.value) || 0;
-    setWordLength(length);
-    setRenderWords(wordMap[length] || []);
-    setAns(Array(parseInt(length || 0)).fill(""));
-  };
-
-  const inputChar = (val, idx) => {
-    let tempCharMap = { ...charMap };
-    tempCharMap[idx] = val;
-    setCharMap(tempCharMap);
-    let tempAns = [...ans];
-    tempAns[idx] = val;
-    setAns(tempAns);
-  };
-
-  // Pass in an array of words
-  // Returns an array of words that are valid
-  // Check validity - there should not be a word NOT found in helpWords
-  function filterHelper(words, helpWords) {
-    const result = words.filter((word) => {
-      let match = true;
-      word.split("").forEach((char) => {
-        if (helpWords.includes(char) === false) {
-          match = false;
-        }
-      });
-      return match;
+  function getWords(chars, length) {
+    const words = [];
+    const combinations = getCombinations(chars, length);
+    combinations.forEach((combination) => {
+      const word =
+        typeof combination === "string" ? combination : combination.join("");
+      if (isEnglishWord(word) && !words.includes(word)) {
+        words.push(word);
+      }
     });
+    return words;
+  }
 
-    return result;
+  function getCombinations(chars, length) {
+    if (length === 1) return chars.split("");
+    if (chars.length === length) return [chars];
+    const combinations = [];
+    for (let i = 0; i < chars.length; i++) {
+      const char = chars[i];
+      const remainingChars = chars.slice(0, i) + chars.slice(i + 1);
+      const subCombinations = getCombinations(remainingChars, length - 1);
+      subCombinations.forEach((subCombination) => {
+        combinations.push([char].concat(subCombination));
+      });
+    }
+    return combinations;
+  }
+
+  function isEnglishWord(word) {
+    // Check if the word is in a list of known English words
+    if (englishWords.includes(word)) return true;
+    // Alternatively, you can use a natural language processing library to check for word validity
+    return false;
   }
 
   const RenderList = () => {
-    return filterHelper(renderWords, helpWords)
-      .filter((word) => {
-        let toShow = true;
-
-        Object.keys(charMap).forEach((key) => {
-          if (charMap[key] !== word[key] && charMap[key] !== "") {
-            toShow = false;
-          }
-        });
-        return toShow;
-      })
-      .map((word) => <div key={word}>{word}</div>);
+    return validWords.map((word) => <div key={word}>{word}</div>);
   };
 
   return (
     <Container style={{ paddingTop: 30 }}>
       <TextField
         label="Possible Characters"
-        value={helpWords}
+        value={possibleChars}
         onChange={(e) => {
-          setCharMap({}); //Clear charMap
-          setHelpWords(e.target.value.toLowerCase());
+          const chars = e.target.value.toLowerCase();
+          setPossibleChars(chars);
+          setValidWords(getWords(chars, wordLength));
         }}
         onFocus={(e) => e.target.select()}
       />
@@ -94,6 +73,7 @@ export default function WordHack() {
       <h1 style={{ padding: "30px 0" }}>
         Word length: <b>{wordLength}</b>
       </h1>
+
       <Slider
         value={wordLength}
         valueLabelDisplay="auto"
@@ -101,12 +81,11 @@ export default function WordHack() {
         min={0}
         max={10}
         onChange={(e) => {
-          setCharMap({}); //Clear charMap
-          getWords(e);
+          e.target.value > 0 && setWordLength(e.target.value);
         }}
       />
 
-      <form
+      {/* <form
         style={{ display: "flex", flexWrap: "wrap", gap: 20, margin: "30px 0" }}
       >
         {ans.map((char, idx) => (
@@ -126,7 +105,7 @@ export default function WordHack() {
             value={char}
             onFocus={(e) => e.target.select()}
             onChange={(e) => {
-              inputChar(e.target.value.toLowerCase(), idx);
+              inputChar(chars, idx);
 
               //Focus next input
               const form = e.target.form;
@@ -137,7 +116,7 @@ export default function WordHack() {
             }}
           />
         ))}
-      </form>
+      </form> */}
       <RenderList />
     </Container>
   );
