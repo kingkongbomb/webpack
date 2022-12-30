@@ -180,3 +180,15 @@ button.close {
   border: none;
   outline: none;
 }
+
+button.reset {
+  border: none;
+  background: var(--theme);
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+button.reset:hover {
+  opacity: 0.8;
+}

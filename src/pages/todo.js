@@ -1,40 +1,45 @@
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { add, remove, toggle, reset } from "../redux/todos";
 import "../styles/todo.css";
 
 function TodoApp() {
-  //Initialize state from localstorage, if none, then give state an empty array
-  const [todoList, setTodos] = useState(JSON.parse(localStorage.todos || "[]"));
-
-  //Everytime todoList is updated, save to localstorage
-  useEffect(() => {
-    localStorage.todos = JSON.stringify(todoList);
-  }, [todoList]);
-
+  const dispatch = useDispatch();
   function toggleTodo(id) {
-    const newTodos = todoList.map((todo) =>
-      todo.id === id ? { ...todo, done: !todo.done } : todo
-    );
-    setTodos(newTodos);
+    dispatch(toggle(id));
   }
 
   function addTodo(e) {
-    setTodos([
-      { id: Date.now(), todo: e.target.value, done: false },
-      ...todoList,
-    ]);
+    dispatch(add(e.target.value));
     e.target.value = "";
   }
 
   function removeTodo(id) {
-    setTodos(todoList.filter((todo) => todo.id !== id));
+    dispatch(remove(id));
+  }
+
+  function resetTodo() {
+    dispatch(reset());
   }
 
   return (
     <div className="todo-container">
-      <h1 id="todoTitle">To Do List</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1 id="todoTitle">To Do List</h1>
+        <button className="reset" onClick={resetTodo}>
+          Reset
+        </button>
+      </div>
+
       <TodoInput addTodo={addTodo} />
       <TodoList
-        todoList={todoList}
+        todoList={useSelector(({ todo }) => todo.todos)}
         toggleTodo={toggleTodo}
         removeTodo={removeTodo}
       />
