@@ -1,21 +1,20 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add, remove, toggle, reset } from "../redux/todos";
 import "../styles/todo.css";
 
 function TodoApp() {
   const dispatch = useDispatch();
-  function toggleTodo(id) {
-    dispatch(toggle(id));
+  function toggleTodo(id, val) {
+    dispatch(toggle({ id, val }));
   }
 
   function addTodo(e) {
-    dispatch(add(e.target.value));
+    dispatch(add({ val: e.target.value }));
     e.target.value = "";
   }
 
   function removeTodo(id) {
-    dispatch(remove(id));
+    dispatch(remove({ id }));
   }
 
   function resetTodo() {
@@ -63,7 +62,7 @@ function TodoInput({ addTodo }) {
 }
 
 function TodoList({ todoList, toggleTodo, removeTodo }) {
-  const renderedList = todoList.map((todo, index) => (
+  const renderedList = todoList.map((todo) => (
     <Todo
       key={todo.id}
       todoItem={todo}
@@ -81,7 +80,7 @@ function Todo({ todoItem, toggleTodo, removeTodo }) {
         <input
           type="checkbox"
           checked={todoItem.done}
-          onChange={() => toggleTodo(todoItem.id)}
+          onChange={() => toggleTodo(todoItem.id, !todoItem.done)}
         />
         <span className="cb"></span>
         <span className="todo">{todoItem.todo}</span>
