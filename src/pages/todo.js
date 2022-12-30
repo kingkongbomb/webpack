@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { add, remove, toggle, reset } from "../redux/todos";
+import { add, remove, toggle, reset } from "../redux/slices/todos";
 import "../styles/todo.css";
 
 function TodoApp() {
