@@ -9258,6 +9258,7 @@ __metadata:
     react-router-dom: ^5.2.0
     react-scripts: ^5.0.1
     recharts: ^1.8.5
+    redux-persist: ^6.0.0
     source-map-explorer: ^2.4.2
   languageName: unknown
   linkType: soft
@@ -11348,6 +11349,15 @@ __metadata:
   dependencies:
     balanced-match: ^1.0.0
   checksum: d0169016ea22b59d55fa3206507c8f2d009574abd0f9b86552035a8405d52f6d7d5b60d084c5950d6f2884df7de42f87a6260b1b386b79ede63bfc87ea0c3ce8
+  languageName: node
+  linkType: hard
+
+"redux-persist@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "redux-persist@npm:6.0.0"
+  peerDependencies:
+    redux: ">4.0.0"
+  checksum: edaf10dbf17351ce8058d0802357adae8665b3a1ff39371834e37838ddbe1a79cccbc717b8ba54acb5307651ccf51d0f7dc1cbc8dbae0726ff952d11ef61c6b8
   languageName: node
   linkType: hard
 

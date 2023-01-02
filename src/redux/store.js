@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { loadState, saveState } from "../utils/localstorage";
-import todos from "./slices/todos";
+import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
+import { rootReducer } from "./rootReducer";
 
-const store = configureStore({
-  reducer: {
-    todo: todos,
-  },
-  preloadedState: loadState(),
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["todo"],
+};
+
+export const store = configureStore({
+  reducer: persistReducer(persistConfig, rootReducer),
 });
 
-store.subscribe(() => saveState(store.getState()));
-
-export { store };
+export const persistor = persistStore(store);
